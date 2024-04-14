@@ -1,0 +1,24 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block title %}
+About Us
+{% endblock %}
+{% block body %}
+<div class="container" style="margin-top: 35px;">
+  <div class="row">
+    <div class="col-md-12">
+      <center>
+        <h2 style="font-family:  Times New Roman;">ABOUT US </h2>
+        <img src="{% static './myapp/images/agbg2.jpg' %}" width="300" height="300" style="margin-top: 20px; border-radius:20px;">
+        <p class=" medium-text" style="margin-top: 35px;">We are dedicated to revolutionizing the agricultural industry by providing innovative solutions and support to farmers and agricultural enthusiasts worldwide. </p>
+        <b><p class="2 medium-text"><i>" Our mission is to empower farmers with the knowledge, tools, and resources they need to thrive in today's rapidly evolving agricultural landscape. "</i></p></b>
+      </center>
+    </div>
+  </div>
+</div>
+<style>
+  .medium-text {
+        font-size: 20px;
+    }
+</style>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'myapp/user_base.html' %}
+{% load static %}
+{% block title %}Message Add{% endblock %}
+{% block body %}
+<center>
+    <h1 style="margin-top: 40px; font-family:  Times New Roman;">Queries ???</h1>
+<div class="container">
+    {% if msg %}
+		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  			<strong>{{msg}}..!</strong>
+  			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    			<span aria-hidden="true">&times;</span>
+  			</button>
+		</div>
+		{% endif %}
+    <form name="frm"  role="form" action="{% url 'user_admin_query_add' %}" method="post"
+        enctype="multipart/form-data">
+            {% csrf_token %}
+           <div class="form-group"  style="margin-top: 40px;">
+<!--               <label for="query">Message</label>-->
+               <textarea class="form-control" id="query" name="query" required="required" style="width: 50%; height:80%"></textarea>
+           </div>
+
+           <button type="submit" class="btn btn-info" id="bt" name="bt">Send</button>
+            <button type="reset" class="btn btn-danger" id="rt" name="rt">Reset</button>
+
+    </form>
+</div>
+</center>
+{% endblock %}

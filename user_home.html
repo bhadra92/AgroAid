@@ -1,0 +1,92 @@
+{% extends 'myapp/user_base.html' %}
+{% load static %}
+{% block title %}Hello User{% endblock %}
+
+{% block body %}
+<center>
+    <div class="container" style="margin-top: 40px;">
+        <h2 style="font-family:  Times New Roman;">Welcome {{ p.fname}}</h2>
+    </div>
+
+    <div class="containers">
+        <div class="gallery">
+            <img src="{% static 'myapp/images/soil.jfif' %}">
+            <p><b>Crop Recommendation</b></p>
+            <p>Recommends crops based on Nitrogen(N), Phosphorus(P), Potassium(K)
+                value and weather conditions.</p>
+            <div class="dropdown mb-3">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownSoil" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Recommandation
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownSoil">
+                    <a class="dropdown-item" href="{%url 'user_soil_query_add'%}">New Test</a>
+                    <a class="dropdown-item" href="{%url 'user_soil_query_view'%}">History</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="gallery">
+            <img src="{% static 'myapp/images/leaf.jfif' %}">
+            <p><b>Leaf Disease Detection</b></p>
+            <p>Detect leaf disease for Apple,Bell Pepper,Cherry,Corn,Grape,Peach,Potato,
+                Strawberry and Tomato.</p>
+            <div class="dropdown mb-3">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownPlant" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Detection
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownPlant">
+                    <a class="dropdown-item" href="{%url 'user_plant_query_add'%}">New Test</a>
+                    <a class="dropdown-item" href="{%url 'user_plant_query_view'%}">History</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="gallery">
+            <img src="{% static 'myapp/images/chat.jfif' %}" style="height:200px;width: 320px;">
+            <p><b>Messages</b></p>
+            <p>Enquire about any crop related queries.
+               Helps in exchanging informations and improves Knowledge. </p>
+            <div class="dropdown mb-3">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMessages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Messages
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMessages">
+                    <a class="dropdown-item" href="{% url 'user_admin_query_add'%}">New Messages</a>
+                    <a class="dropdown-item" href="{% url 'user_admin_query_view'%}">Messages</a>
+                    <a class="dropdown-item" href="{% url 'user_admin_query_pending_view'%}">Pending Messages</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</center>
+
+<style>
+    .containers {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px; /* Adjust the margin as needed */
+    }
+
+    .gallery {
+        margin: 20px;
+        border: 1px solid #ccc;
+        padding: 20px; /* Increase the padding for larger containers */
+        transition: transform 0.3s; /* Add transition effect */
+        border-radius: 10px;
+        background: white;
+        width: 350px;
+    }
+
+    .gallery:hover {
+        transform: scale(1.05); /* Increase the size on hover */
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+    }
+
+    .gallery img{
+         border-radius: 10px;
+         width: 300px;
+    }
+</style>
+{% endblock %}

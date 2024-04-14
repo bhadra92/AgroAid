@@ -1,0 +1,38 @@
+{% extends 'myapp/base.html' %}
+{% load static %}
+{% block title %}User Login{% endblock %}
+{% block body %}
+<center>
+     <h2 style="font-family:  Times New Roman; margin-top: 35px;">User Login</h2>
+        <img src="{% static 'myapp/images/person.png'%}" width="150" height="150">
+    <div class="container">
+        {% if msg %}
+		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  			<strong>{{msg}}..!</strong>
+  			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    			<span aria-hidden="true"></span>
+  			</button>
+		</div>
+		{% endif %}
+        <form role="form" name="frm" action="{% url 'user_login' %}"  method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="uname" >User Name:</label>
+                <input class="form-control" type="email" id="uname" name="uname" required style="width:50%">
+            </div>
+             <div class="form-group">
+                 <label for="uname">Password:</label>
+                 <input class="form-control" type="password" id="passwd" name="passwd" required style="width:50%">
+             </div></br>
+            <button type="submit" class="btn btn-success" id="bt" name="bt">Login</button>
+            <button type="reset" class="btn btn-danger" id="rt" name="rt">Reset</button>
+
+            <br/> <br/>
+            <p>Don't have an account?</p>
+        <a class="btn btn-info" href="{% url 'user_details_add' %}">Register</a></h1>
+
+        </form>
+<!--    {{msg}}-->
+    </div>
+</center>
+{% endblock %}

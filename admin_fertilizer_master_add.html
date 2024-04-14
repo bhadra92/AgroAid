@@ -1,0 +1,51 @@
+{% extends 'myapp/admin_base.html' %}
+{% load static %}
+{% block title %}New Fertilizer{% endblock %}
+{% block body %}
+<center>
+    <h2 style="margin-top: 40px; font-family:  Times New Roman;">New  Fertilizer</h2>
+	<div class="container">
+		{% if msg %}
+		<div class="alert alert-success alert-dismissible fade show" role="alert">
+  			<strong>{{msg}}..!</strong>
+  			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    			<span aria-hidden="true">&times;</span>
+  			</button>
+		</div>
+		{% endif %}
+<!--		# 6. fertilizer_master - id, disease_id, fertilizer_name, company_name, url-->
+    <form role="form" name="frm" action="{% url 'admin_fertilizer_master_add' %}" method="post" style="margin-top:30px">
+        {% csrf_token %}
+        <div class="form-group">
+			<label for="fertilizer_name">Name: </label>
+	        <input class="form-control" type="text"  id="fertilizer_name" name="fertilizer_name"
+				   placeholder="Enter fertilizer name " required="required" style="width:50%">
+<!--			<input class="form-control" type="text"  id="lname" name="lname" placeholder="Last name" required="required">-->
+		</div>
+	    <div class="form-group">
+			<label for="disease_id">Disease: </label>
+			<select class="form-control" id="disease_id"  name="disease_id" style="width:50%">
+                {% for  dl in disease_list%}
+                <option value="{{dl.id}}">{{dl.crop}} - {{dl.disease}}</option>
+                {% endfor %}
+            </select>
+
+		</div>
+        <div class="form-group">
+			<label for="company_name">Company Name:</label>
+	        <input class="form-control" type="text"  id="company_name" name="company_name"
+				   placeholder="company_name" required="required" style="width:50%">
+		</div>
+ 		<div class="form-group">
+			<label for="url">URL:</label>
+	        <input class="form-control" type="url"  id="url" name="url"
+				   placeholder="http://www.c.com" required="required" style="width:50%">
+		</div>
+	    <button type="submit" class="btn btn-info" id="bt" name="bt">Add</button>
+        <button type="reset" class="btn btn-danger" id="rt" name="rt">Reset</button>
+
+    </form>
+
+	</div>
+</center>
+{% endblock %}

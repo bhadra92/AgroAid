@@ -1,0 +1,61 @@
+{% extends 'myapp/user_base.html' %}
+{% load static %}
+{% block title %}Fertilizer Details{% endblock %}
+{% block body %}
+<style>
+.tablecenterheadCSS th{
+	text-align:center;
+}
+.tablecenterheadCSS td{
+	text-align:center;
+}
+</style>
+<center>
+    <h2><font color="#366092">Fertilizer Details</font></h2>
+<div class="container">
+    {% if msg %}
+		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  			<strong>{{msg}}..!</strong>
+  			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    			<span aria-hidden="true">&times;</span>
+  			</button>
+		</div>
+		{% endif %}
+    <form name="frm" action="" method="post">
+            {% csrf_token %}
+         <table class="tablecenterheadCSS table table-hover table-bordered table-sm">
+        <thead>
+             <tr>
+                 <th>Name</th>
+                 <th>Disease</th>
+                 <th>Company</th>
+                 <th>URL</th>
+<!--                 <th>Action</th>-->
+            </tr>
+        </thead>
+        {% for b in fertilizer_list %}
+             <tbody>
+        <tr class="info ">
+            <td>{{ b.fertilizer_name }}</td>
+            {%for dl in disease_list%}
+            {%if dl.id == b.disease_id%}
+            <td>{{ dl.crop }} {{ dl.disease }}</td>
+            {%endif%}
+            {%endfor%}
+            <td>{{ b.company_name }}</td>
+            <td>{{ b.url }}</td>
+            <td>
+                <a class="btn btn-info" href="{{ b.url }}">Details</a>
+<!--                <a class="btn btn-danger" href="../admin_fertilizer_master_delete?id={{b.id}}">Delete</a>-->
+            </td>
+        </tr>
+             </tbody>
+        {% endfor %}
+        </table>
+        <br/>
+
+
+    </form>
+</div>
+</center>
+{% endblock %}

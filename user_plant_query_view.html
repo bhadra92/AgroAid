@@ -1,0 +1,59 @@
+{% extends 'myapp/user_base.html' %}
+{% load static %}
+{% block title %}Plant Disease Prediction{% endblock %}
+{% block body %}
+<center>
+    <h1 style="margin-top: 40px; font-family:  Times New Roman;">Disease Detection History</h1>
+    <div class="container">
+        {% if msg %}
+		<div class="alert alert-warning alert-dismissible fade show" role="alert" style="margin-top: 25px;">
+  			<strong>{{msg}}..!</strong>
+  			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    			<span aria-hidden="true">&times;</span>
+  			</button>
+		</div>
+		{% endif %}
+    <form role="form" name="frm" action="{% url 'user_plant_query_view'%}" method="post">
+        {% csrf_token %}
+        <!--# 4. user_plant_query - id, user_id, pic_path, result, dt, tm-->
+        <table class="table table-striped table-bordered"  style="margin-top: 40px;">
+            <thead>
+            <tr>
+<!--                <th>Id</th>-->
+                <th>User</th>
+
+                <th>Pictures</th>
+                <th>Result</th>
+                <th>Date / Time</th>
+                <th>Action</th>
+            </tr>
+            </thead>
+            {% for nl in query_list %}
+            <tbody>
+            <tr>
+<!--        <td>{{ nl.id }}</td>-->
+                {% for u in user_list %}
+				{% if u.user_id == nl.user_id %}
+                <td><b>{{ u.fname }} {{ u.lname }}</b></td>
+				{% endif %}
+			    {% endfor %}
+
+                <td><embed src="../static/myapp/media/{{ nl.pic_path }}" width="56" height="56"></embed></td>
+                <td>{{ nl.result }}</td>
+                <td>{{ nl.dt }} / {{ nl.tm }}</td>
+<!--                <td>{{ nl.status }}</td>-->
+                <td>
+                    {% if nl.status == 'yes'%}
+                    <a class='btn btn-info' href="../user_fertilizer_master_view?id={{ nl.id }}">Fertilizer</a>
+                    {%endif%}
+                </td>
+            </tr>
+            <tbody>
+            {% endfor %}
+        </table>
+    </form>
+<!--        <a class='btn btn-info' href="{% url 'admin_notice_board_add' %}">Add news</a>-->
+    </div>
+<!--    <h3>{{msg}}</h3>-->
+</center>
+{% endblock %}

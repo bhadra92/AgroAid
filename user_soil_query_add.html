@@ -1,0 +1,82 @@
+{% extends 'myapp/user_base.html' %}
+{% load static %}
+{% block title %}Soil Test Add{% endblock %}
+{% block body %}
+<center>
+	<h1 style="margin-top: 40px; font-family:  Times New Roman;">Crop Recommendation</h1>
+	<div class="container">
+		{% if msg %}
+		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  			<strong>{{msg}}..!</strong>
+  			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    			<span aria-hidden="true">&times;</span>
+  			</button>
+		</div>
+		{% endif %}
+    	 <div class="row">
+            <div class="col-md-6 ">
+                <img src="{% static 'myapp/images/crop3.webp' %}" class="img-fluid" alt="Image" style="margin-top: 60px; width:500px;height:400px;border-radius:20px;">
+            </div>
+            <div class="col-md-6">
+                <form name="frm" role="form" action="{% url 'user_soil_query_add' %}" method="post">
+                    {% csrf_token %}
+                    <!--# 3. user_soil_query - id , user_id, N,P,K,temperature,humidity,ph,rainfall,result, dt, tm-->
+                    <div class="row" style="margin-top: 100px;">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="N">N</label>
+                                <input class="form-control" type="text" id="N" name="N">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="P">P</label>
+                                <input class="form-control" type="text" id="P" name="P">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="K">K</label>
+                                <input class="form-control" type="text" id="K" name="K">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="temperature">Temperature</label>
+                                <input class="form-control" type="text" id="temperature" name="temperature">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="humidity">Humidity</label>
+                                <input class="form-control" type="text" id="humidity" name="humidity">
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="ph">ph</label>
+                                <input class="form-control" type="text" id="ph" name="ph">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col"></div>
+                        <div class="col">
+                            <div class="form-group">
+                                <label for="rainfall">Rainfall</label>
+                                <input class="form-control" type="text" id="rainfall" name="rainfall">
+                            </div>
+                        </div>
+                        <div class="col"></div>
+                    </div>
+                    <br>
+                    <button type="submit" class="btn btn-info" id="bt" name="bt">Predict</button>
+                    <button type="reset" class="btn btn-danger" id="rt" name="rt" style="margin-left:10px;">Reset</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</center>
+{% endblock %}

@@ -1,0 +1,83 @@
+{% extends 'myapp/admin_base.html' %}
+{% load static %}
+
+{% block body %}
+<center>
+    <h1 style="font-family:  Times New Roman; margin-top: 30px;">Welcome Admin !!!</h1>
+        <div class="containers">
+        <div class="gallery">
+            <img src="{% static 'myapp/images/leaf.jfif' %}">
+            <p><b>Add Crop Diseases and Fertilizers</b></p>
+            <div class="dropdown mb-3">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownPlant" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Add
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownPlant">
+                    <a class="dropdown-item" href="{% url 'admin_disease_master_view'%}">Crop Diseases</a>
+            <a class="dropdown-item" href="{% url 'admin_fertilizer_master_view'%}">Fertilizers</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="gallery">
+            <img src="{% static 'myapp/images/chat.jfif' %}" style="height:200px;width: 320px;">
+            <p><b>Messages</b></p>
+            <div class="dropdown mb-3">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMessages" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    Messages
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMessages">
+                    <a class="dropdown-item" href="{% url 'admin_user_query_pending_view'%}">Pending</a>
+                    <a class="dropdown-item" href="{% url 'admin_user_query_view'%}">Replied</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="gallery">
+            <img src="{% static 'myapp/images/chat.jfif' %}" style="height:200px;width: 320px;">
+            <p><b>Notice Board</b></p>
+            <div class="dropdown mb-3">
+                <a class="btn btn-primary" href="{% url 'admin_notice_board_view'%}">
+                    Notice Board
+                </a>
+<!--                <div class="dropdown-menu" aria-labelledby="dropdownMessages">-->
+<!--                    <a class="dropdown-item" href="{% url 'admin_user_query_pending_view'%}">Pending</a>-->
+<!--                    <a class="dropdown-item" href="{% url 'admin_user_query_view'%}">Replied</a>-->
+<!--                     <a class="nav-link" href="{% url 'admin_notice_board_view'%}">Notice Board</a>-->
+<!--                </div>-->
+            </div>
+        </div>
+    </div>
+
+</center>
+<style>
+    .containers {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        margin-top: 20px; /* Adjust the margin as needed */
+    }
+
+    .gallery {
+        margin: 20px;
+        border: 1px solid #ccc;
+        padding: 20px; /* Increase the padding for larger containers */
+        transition: transform 0.3s; /* Add transition effect */
+        border-radius: 10px;
+        background: white;
+        width: 350px;
+    }
+
+    .gallery:hover {
+        transform: scale(1.05); /* Increase the size on hover */
+        box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Add shadow on hover */
+    }
+
+    .gallery img{
+         border-radius: 10px;
+         width: 300px;
+    }
+
+</style>
+{% endblock %}

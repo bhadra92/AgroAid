@@ -1,0 +1,31 @@
+{% extends 'myapp/admin_base.html' %}
+{% load static %}
+{% block title %}Message Reply{% endblock %}
+{% block body %}
+<center>
+    <h1 style="margin-top: 40px; font-family:  Times New Roman;" >Message Reply</h1>
+     <div class="container">
+         {% if msg %}
+		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  			<strong>{{msg}}..!</strong>
+  			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    			<span aria-hidden="true">&times;</span>
+  			</button>
+		</div>
+		{% endif %}
+    <form role="form" name="frm" action="{% url 'admin_user_query_reply'%}" method="post" style="margin-top: 40px;">
+        {% csrf_token %}
+            <input type="hidden" class="form-control" id="message_id"  name="message_id"
+                   value="{{message_id}}">
+        <div class="form-group">
+            <label for="reply">Answer :</label>
+            <textarea class="form-control" name="reply" id="reply"></textarea>
+        </div>
+
+       <button type="submit" class="btn btn-info" id="bt" name="bt">Reply</button>
+        <button type="reset" class="btn btn-info" id="rt" name="rt">Clear</button>
+    </form>
+     </div>
+    <h3>{{msg}}</h3>
+</center>
+{% endblock %}

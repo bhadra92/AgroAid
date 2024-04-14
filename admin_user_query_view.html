@@ -1,0 +1,61 @@
+{% extends 'myapp/admin_base.html' %}
+{% load static %}
+{% block title %}User Messages{% endblock %}
+{% block body %}
+<center>
+
+    <h2 style="margin-top: 40px; font-family:  Times New Roman;">User Messages</h2>
+<div class="container">
+    {% if msg %}
+		<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  			<strong>{{msg}}..!</strong>
+  			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    			<span aria-hidden="true">&times;</span>
+  			</button>
+		</div>
+		{% endif %}
+    <form name="frm"  role="form" action="" method="post" style="margin-top: 40px;">
+            {% csrf_token %}
+         <table class="table table-striped table-bordered">
+        <thead>
+             <tr>
+<!--            <th>ID</th>-->
+            <th>User</th>
+
+            <th>Message</th>
+            <th>Reply</th>
+
+            <th>Action</th>
+        </tr>
+             </thead>
+        {% for c in message_list %}
+        <tbody>
+        <tr class="info ">
+<!--            <td>{{ c.id }}</td>-->
+            {% for p in user_list %}
+	            {% if p.user_id == c.user_id %}
+				<td>{{ p.fname }} {{ p.lname }}</td>
+				{% endif %}
+			{% endfor %}
+
+
+            <td>{{ c.query }}({{ c.dt }}/{{ c.tm }})</td>
+            <td>{{ c.reply }}({{ c.r_dt }}/{{ c.r_tm }})</td>
+
+            <td>
+                {%if c.status == 'PENDING'%}
+                <a class="btn btn-info" href="../admin_user_query_reply?id={{c.id}}">Reply</a>
+                {%endif%}
+
+            </td>
+        </tr>
+             </tbody>
+        {% endfor %}
+        </table>
+        {{msg}}
+        <br/>
+
+    </form>
+</div>
+</center>
+{% endblock %}

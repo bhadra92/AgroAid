@@ -1,0 +1,67 @@
+{% extends 'myapp/user_base.html' %}
+{% load static %}
+{% block title %}Soil Test History {% endblock %}
+{% block body %}
+<center>
+    <h1 style="margin-top: 40px; font-family: Times New Roman;">Crop Recommendation History</h1>
+    <div class="container">
+        <form name="frm" action="" method="post">
+            {% csrf_token %}
+            <!--# 3. user_soil_query - id , user_id, N,P,K,temperature,humidity,ph,rainfall,result, dt, tm-->
+            <table class="table table-striped table-bordered auto-index" style="margin-top: 40px;">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>N</th>
+                        <th>P</th>
+                        <th>K</th>
+                        <th>Temperature</th>
+                        <th>Humidity</th>
+                        <th>Ph</th>
+                        <th>Rainfall</th>
+                        <th>Result</th>
+                        <th>Date/Time</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for test in test_list %}
+                    <tr class="info">
+                        <td></td>
+                        <td>
+                            {% for user in user_list %}
+                            {% if user.user_id == test.user_id %}
+                            <b>{{ user.fname }} {{ user.lname }}</b>
+                            {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td>{{ test.N }}</td>
+                        <td>{{ test.P }}</td>
+                        <td>{{ test.K }}</td>
+                        <td>{{ test.temperature }}</td>
+                        <td>{{ test.humidity }}</td>
+                        <td>{{ test.ph }}</td>
+                        <td>{{ test.rainfall }}</td>
+                        <td><b>{{ test.result }}</b></td>
+                        <td>{{ test.dt }}/{{ test.tm }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <br />
+        </form>
+    </div>
+</center>
+<style>
+    form {
+        counter-reset: Serial;
+    }
+
+    table {}
+
+    .auto-index td:first-child:before {
+        counter-increment: Serial;
+        content: counter(Serial);
+    }
+</style>
+{% endblock %}
